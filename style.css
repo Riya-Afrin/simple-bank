@@ -17,3 +17,30 @@ label{
     border-radius: 10px;
     box-shadow: 5px 5px 8px lightslategrey;
 }
+#banking-area{
+    display: none;
+}
+
+/* -----banking area---- */
+
+.deposit{
+    background-color: orange;
+}
+.withdraw{
+    background-color: salmon;
+}
+.balance{
+    background-color: slateblue;
+}
+.status{
+    margin: 0px 20px;
+    color: white;
+    padding: 20px;
+    border-radius: 20px;
+}
+.input-box{
+    margin-top: 50px;
+    padding: 55px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 8px lightslategrey;
+}

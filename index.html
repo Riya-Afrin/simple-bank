@@ -1,37 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Simple Bank</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- !-------- Log In Area -------- -->
+
     <div id="login-area">
-        <h1 class="title">Welcome To Simple Bank</h1>
-        <div class="form">
-            <h3 class="title">Login</h3>
-            <label for="">Email</label>
-            <input type="text" class="form-control" placeholder="Enter you email">
-            <br>
-            <label for="">Password</label>
-            <input type="password" class="form-control" name="" id="" placeholder="Enter your password">
-           <br>
-            <button id="login-button" class="btn btn-success">Log In</button>
-        </div>
+      <h1 class="title">Welcome To Simple Bank</h1>
+      <div class="form">
+        <h3 class="title">Login</h3>
+        <label for="">Email</label>
+        <input type="text" class="form-control" placeholder="Enter you email" />
+        <br />
+        <label for="">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          name=""
+          id=""
+          placeholder="Enter your password"
+        />
+        <br />
+        <button id="login-button" class="btn btn-success">Log In</button>
+      </div>
     </div>
-    
+
+    <!-- !-------- Banking Area -------- -->
+
     <div id="banking-area">
-        <h1>Transaction Area</h1>
+      <h1>Transaction Area</h1>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="deposit status">
+            <h5>Deposit</h5>
+            <h2>$<span id="currentDeposit">0</span></h2>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="withdraw status">
+            <h5>Withdraw</h5>
+            <h2>$0</h2>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="balance status">
+            <h5>Balance</h5>
+            <h2>$<span id="currentbalance">2000</span></h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="input-area d-flex">
+        <div class="col-md-6 input-box">
+          <h4>Deposit</h4>
+          <br />
+          <input
+            id="depositAmount"
+            type="text"
+            class="form-control"
+            placeholder="Enter deposit amount"
+          />
+          <br />
+          <button id="deposit" class="btn btn-success">Deposit</button>
+        </div>
+
+        <div id="withdraw" class="col-md-6 input-box">
+          <h4>Withdraw</h4>
+          <br />
+          <input
+            id="withdrawAmount"
+            type="text"
+            class="form-control"
+            placeholder="Enter withdraw amount"
+          />
+          <br />
+          <button class="btn btn-success">Withdraw</button>
+        </div>
+      </div>
     </div>
     <script>
-       const loginButton = document.getElementById('login-button');
-       loginButton.addEventListener('click', function(){
-        const loginArea = document.getElementById('login-area');
-        loginArea.style.display = "none";
-       })
+         <!-- !-------- Log In Area event handler-------- -->
+        
+        const loginButton = document.getElementById("login-button");
+        loginButton.addEventListener("click", function () {
+          const loginArea = document.getElementById("login-area");
+          loginArea.style.display = "none"; //hiding login area
+
+          const bankingArea = document.getElementById("banking-area");
+          bankingArea.style.display = "block"; //showing banking area
+        });
+
+        <!-- !-------- Banking Area event handler -------- -->
+         
+        //------Deposit-------
+        const depositButton = document.getElementById('deposit').addEventListener('click', function(){
+          const depositAmount = document.getElementById("depositAmount").value;
+
+          const convertDeposit = parseFloat(depositAmount); //converting because it is throughing as string
+
+          const currentDeposit = document.getElementById("currentDeposit").innerText;
+          const convertCurrentDeposit = parseFloat(currentDeposit);
+          const totalDeposit = convertDeposit + convertCurrentDeposit;
+          console.log(totalDeposit);
+
+          document.getElementById("currentDeposit").innerText = totalDeposit; 
+          
+       //------Balance-------
+            const currentBalance = document.getElementById('currentbalance').innerText;
+            const convertCurrentBalance = parseFloat(currentBalance);
+            const totalBalance = convertDeposit+convertCurrentBalance;
+            document.getElementById("currentbalance").innerText = totalBalance;
+
+          document.getElementById("depositAmount").value =""; //empty field after each entry
+      })
+
+
     </script>
-</body>
+  </body>
 </html>
