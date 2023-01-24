@@ -91,43 +91,41 @@
         </div>
       </div>
     </div>
+
     <script>
-         <!-- !-------- Log In Area event handler-------- -->
-        
-        const loginButton = document.getElementById("login-button");
-        loginButton.addEventListener("click", function () {
-          const loginArea = document.getElementById("login-area");
-          loginArea.style.display = "none"; //hiding login area
+      <!-- !-------- Log In Area event handler-------- -->
 
-          const bankingArea = document.getElementById("banking-area");
-          bankingArea.style.display = "block"; //showing banking area
-        });
+      const loginButton = document.getElementById("login-button");
+      loginButton.addEventListener("click", function () {
+        const loginArea = document.getElementById("login-area");
+        loginArea.style.display = "none"; //hiding login area
 
-        <!-- !-------- Banking Area event handler -------- -->
-         
-        //------Deposit-------
-        const depositButton = document.getElementById('deposit').addEventListener('click', function(){
-          const depositAmount = document.getElementById("depositAmount").value;
+        const bankingArea = document.getElementById("banking-area");
+        bankingArea.style.display = "block"; //showing banking area
+      });
 
+      <!-- !-------- Banking Area event handler -------- -->
+
+      //------Deposit-------
+      const depositButton = document.getElementById("deposit").addEventListener("click", function () {
+          const depositAmount = document.getElementById("depositAmount").value; //fetching the value
           const convertDeposit = parseFloat(depositAmount); //converting because it is throughing as string
 
-          const currentDeposit = document.getElementById("currentDeposit").innerText;
-          const convertCurrentDeposit = parseFloat(currentDeposit);
-          const totalDeposit = convertDeposit + convertCurrentDeposit;
-          console.log(totalDeposit);
+          //------Balance-------
 
-          document.getElementById("currentDeposit").innerText = totalDeposit; 
+          function inputField(id, convertDeposit) {
+            const current =document.getElementById(id).innerText;
+          const convertCurrent = parseFloat(current);
           
-       //------Balance-------
-            const currentBalance = document.getElementById('currentbalance').innerText;
-            const convertCurrentBalance = parseFloat(currentBalance);
-            const totalBalance = convertDeposit+convertCurrentBalance;
-            document.getElementById("currentbalance").innerText = totalBalance;
+          const totalAmount = convertDeposit + convertCurrent;
+          document.getElementById(id).innerText = totalAmount;
+          }
+          
+          inputField("currentDeposit", convertDeposit);
+          inputField("currentbalance", convertDeposit);
 
-          document.getElementById("depositAmount").value =""; //empty field after each entry
-      })
-
-
+          document.getElementById("depositAmount").value = ""; //empty field after each entry
+        });
     </script>
   </body>
 </html>
