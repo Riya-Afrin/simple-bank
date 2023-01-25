@@ -74,7 +74,7 @@
             placeholder="Enter deposit amount"
           />
           <br />
-          <button id="deposit" class="btn btn-success">Deposit</button>
+          <button id="depositButton" class="btn btn-success">Deposit</button>
         </div>
 
         <div id="withdraw" class="col-md-6 input-box">
@@ -87,7 +87,7 @@
             placeholder="Enter withdraw amount"
           />
           <br />
-          <button class="btn btn-success">Withdraw</button>
+          <button id="withdrawButton" class="btn btn-success">Withdraw</button>
         </div>
       </div>
     </div>
@@ -107,10 +107,29 @@
       <!-- !-------- Banking Area event handler -------- -->
 
       //------Deposit-------
-      const depositButton = document.getElementById("deposit").addEventListener("click", function () {
-          const depositAmount = document.getElementById("depositAmount").value; //fetching the value
-          const convertDeposit = parseFloat(depositAmount); //converting because it is throughing as string
+      const depositButton = document.getElementById("depositButton").addEventListener("click", function () {
+          // const depositAmount = document.getElementById("depositAmount").value; //fetching the value
+          // const convertDeposit = parseFloat(depositAmount); //converting because it is throughing as string
+          const convertDeposit = inputNumber("depositAmount");
+  
+          inputField("currentDeposit", convertDeposit);
+          inputField("currentbalance", convertDeposit);
 
+          document.getElementById("depositAmount").value = ""; //empty field after each entry
+        })
+
+
+        //withdraw
+        const withdrawButton = document.getElementById("withdrawButton").addEventListener("click", function(){
+         const convertWithdraw = inputNumber("withdrawAmount");
+         console.log(convertWithdraw);
+        })
+
+        function inputNumber(id) {
+          const amount = document.getElementById(id).value;
+          const amountNumber = parseFloat(amount);
+          return amountNumber;
+        }
           //------Balance-------
 
           function inputField(id, convertDeposit) {
@@ -120,12 +139,7 @@
           const totalAmount = convertDeposit + convertCurrent;
           document.getElementById(id).innerText = totalAmount;
           }
-          
-          inputField("currentDeposit", convertDeposit);
-          inputField("currentbalance", convertDeposit);
-
-          document.getElementById("depositAmount").value = ""; //empty field after each entry
-        });
+        
     </script>
   </body>
 </html>
