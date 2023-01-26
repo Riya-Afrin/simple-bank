@@ -51,14 +51,14 @@
         <div class="col-md-4">
           <div class="withdraw status">
             <h5>Withdraw</h5>
-            <h2>$0</h2>
+            <h2>$<span id="currentWithdraw">0</span></h2>
           </div>
         </div>
 
         <div class="col-md-4">
           <div class="balance status">
             <h5>Balance</h5>
-            <h2>$<span id="currentbalance">2000</span></h2>
+            <h2>$<span id="currentBalance">2000</span></h2>
           </div>
         </div>
       </div>
@@ -98,48 +98,53 @@
       const loginButton = document.getElementById("login-button");
       loginButton.addEventListener("click", function () {
         const loginArea = document.getElementById("login-area");
-        loginArea.style.display = "none"; //hiding login area
+        loginArea.style.display = "none";          //hiding login area
 
         const bankingArea = document.getElementById("banking-area");
-        bankingArea.style.display = "block"; //showing banking area
-      });
+        bankingArea.style.display = "block";       //showing banking area
+      })
 
       <!-- !-------- Banking Area event handler -------- -->
 
-      //------Deposit-------
-      const depositButton = document.getElementById("depositButton").addEventListener("click", function () {
-          // const depositAmount = document.getElementById("depositAmount").value; //fetching the value
-          // const convertDeposit = parseFloat(depositAmount); //converting because it is throughing as string
+      //---------Deposit-----------
+      const depositButton = document
+        .getElementById("depositButton")
+        .addEventListener("click", function () {
           const convertDeposit = inputNumber("depositAmount");
-  
-          inputField("currentDeposit", convertDeposit);
-          inputField("currentbalance", convertDeposit);
+
+          updatedField("currentDeposit", convertDeposit);
+          updatedField("currentBalance", convertDeposit);
 
           document.getElementById("depositAmount").value = ""; //empty field after each entry
         })
 
+      //-----------withdraw----------
+      const withdrawButton = document
+        .getElementById("withdrawButton")
+        .addEventListener("click", function () {
+          const withdrawNumber = inputNumber("withdrawAmount");
 
-        //withdraw
-        const withdrawButton = document.getElementById("withdrawButton").addEventListener("click", function(){
-         const convertWithdraw = inputNumber("withdrawAmount");
-         console.log(convertWithdraw);
-        })
+          updatedField("currentWithdraw", withdrawNumber);
+          updatedField("currentBalance", -1 * withdrawNumber); //deducting
 
-        function inputNumber(id) {
-          const amount = document.getElementById(id).value;
-          const amountNumber = parseFloat(amount);
-          return amountNumber;
-        }
-          //------Balance-------
+          document.getElementById("withdrawAmount").value = "";
+        });
 
-          function inputField(id, convertDeposit) {
-            const current =document.getElementById(id).innerText;
-          const convertCurrent = parseFloat(current);
-          
-          const totalAmount = convertDeposit + convertCurrent;
-          document.getElementById(id).innerText = totalAmount;
-          }
-        
+      //------Function for input field-------
+      function inputNumber(id) {
+        const amount = document.getElementById(id).value;
+        const amountNumber = parseFloat(amount);
+        return amountNumber;
+      }
+      //------Function for Balance-------
+
+      function updatedField(id, convertDeposit) {
+        const current = document.getElementById(id).innerText;
+        const currentNumber = parseFloat(current);
+
+        const totalAmount = convertDeposit + currentNumber;
+        document.getElementById(id).innerText = totalAmount;
+      }
     </script>
   </body>
 </html>
